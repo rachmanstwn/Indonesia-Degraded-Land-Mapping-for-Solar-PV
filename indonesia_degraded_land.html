@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_c30ba6ce5a3cf5da07ed5d6481045b12 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+</head>
+<body>
+    
+    
+<div style="position: fixed; bottom: 30px; right: 30px; z-index: 9999;
+            background: white; padding: 12px 16px; border-radius: 8px;
+            border: 2px solid #ccc; font-size: 13px; line-height: 1.8;
+            box-shadow: 2px 2px 6px rgba(0,0,0,0.3);">
+  <b>Land Classification</b><br>
+  <span style="background:#FF4500;width:14px;height:14px;display:inline-block;margin-right:6px;border-radius:2px;"></span>Suitable Degraded Land<br>
+  <span style="background:#e8a838;width:14px;height:14px;display:inline-block;margin-right:6px;border-radius:2px;"></span>Shrubland<br>
+  <span style="background:#78c679;width:14px;height:14px;display:inline-block;margin-right:6px;border-radius:2px;"></span>Grassland / Imperata<br>
+  <span style="background:#d9534f;width:14px;height:14px;display:inline-block;margin-right:6px;border-radius:2px;"></span>Bare land<br>
+  <span style="background:#8c510a;width:14px;height:14px;display:inline-block;margin-right:6px;border-radius:2px;"></span>Deforested (no recovery)<br>
+  <span style="background:#808080;width:14px;height:14px;display:inline-block;margin-right:6px;border-radius:2px;"></span>Exclusion zones<br>
+</div>
+    
+            <div class="folium-map" id="map_c30ba6ce5a3cf5da07ed5d6481045b12" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_c30ba6ce5a3cf5da07ed5d6481045b12 = L.map(
+                "map_c30ba6ce5a3cf5da07ed5d6481045b12",
+                {
+                    center: [-2.5, 118.0],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 5,
+  "zoomControl": true,
+  "preferCanvas": false,
+  "name": "Google Satellite",
+  "control": true,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_504ccdfc1dc5303cd03e7cc27e4aa634 = L.tileLayer(
+                "https://mt1.google.com/vt/lyrs=y\u0026x={x}\u0026y={y}\u0026z={z}",
+                {
+  "minZoom": 0,
+  "maxZoom": 18,
+  "maxNativeZoom": 18,
+  "noWrap": false,
+  "attribution": "Google Satellite Hybrid",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_504ccdfc1dc5303cd03e7cc27e4aa634.addTo(map_c30ba6ce5a3cf5da07ed5d6481045b12);
+        
+    
+            var tile_layer_acc672229daeec73b34f9492e2d0b474 = L.tileLayer(
+                "https://earthengine.googleapis.com/v1/projects/rachman-research/maps/7c90ee0fbfedc2b67937547ec0e65083-6cc76c9f41ab01e50b030530e97fe416/tiles/{z}/{x}/{y}",
+                {
+  "minZoom": 0,
+  "maxZoom": 18,
+  "maxNativeZoom": 18,
+  "noWrap": false,
+  "attribution": "Google Earth Engine",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 0.8,
+}
+
+            );
+        
+    
+            var tile_layer_ea818f6ab9bc30c3a92a9c2f28616443 = L.tileLayer(
+                "https://earthengine.googleapis.com/v1/projects/rachman-research/maps/a8cd88d7741fdcebea594a006557f6ec-3dacbae14a95ab3c9cc377f38bc6f548/tiles/{z}/{x}/{y}",
+                {
+  "minZoom": 0,
+  "maxZoom": 18,
+  "maxNativeZoom": 18,
+  "noWrap": false,
+  "attribution": "Google Earth Engine",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 0.8,
+}
+
+            );
+        
+    
+            var tile_layer_c0ba77bc4f47d8512eea146b26fa429f = L.tileLayer(
+                "https://earthengine.googleapis.com/v1/projects/rachman-research/maps/68a55d2e91d188dfa50e6750a3910082-96025fa1873d7b70fbfd3634fc987333/tiles/{z}/{x}/{y}",
+                {
+  "minZoom": 0,
+  "maxZoom": 18,
+  "maxNativeZoom": 18,
+  "noWrap": false,
+  "attribution": "Google Earth Engine",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 0.8,
+}
+
+            );
+        
+    
+            var tile_layer_e7b8520955c30a4b5f009d150b6f581b = L.tileLayer(
+                "https://earthengine.googleapis.com/v1/projects/rachman-research/maps/eca79b938c970f24196332a0dc201c45-06adab839427578de2fd2181aa18031b/tiles/{z}/{x}/{y}",
+                {
+  "minZoom": 0,
+  "maxZoom": 18,
+  "maxNativeZoom": 18,
+  "noWrap": false,
+  "attribution": "Google Earth Engine",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 0.8,
+}
+
+            );
+        
+    
+            var tile_layer_b977f0aa8f4768328edf5a8ad82866c2 = L.tileLayer(
+                "https://earthengine.googleapis.com/v1/projects/rachman-research/maps/71bf83f0fc77cd70d87722b6b57a77bf-aac8b5046ec58fd50d4e084e1331532b/tiles/{z}/{x}/{y}",
+                {
+  "minZoom": 0,
+  "maxZoom": 18,
+  "maxNativeZoom": 18,
+  "noWrap": false,
+  "attribution": "Google Earth Engine",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 0.8,
+}
+
+            );
+        
+    
+            tile_layer_b977f0aa8f4768328edf5a8ad82866c2.addTo(map_c30ba6ce5a3cf5da07ed5d6481045b12);
+        
+    
+            var layer_control_006749cc4e2e395abc9220cd5138d98c_layers = {
+                base_layers : {
+                    "https://mt1.google.com/vt/lyrs=y\u0026x={x}\u0026y={y}\u0026z={z}" : tile_layer_504ccdfc1dc5303cd03e7cc27e4aa634,
+                },
+                overlays :  {
+                    "ESA WorldCover 2021" : tile_layer_acc672229daeec73b34f9492e2d0b474,
+                    "Hansen Forest Loss 2001\u20132023" : tile_layer_ea818f6ab9bc30c3a92a9c2f28616443,
+                    "Exclusion Zones" : tile_layer_c0ba77bc4f47d8512eea146b26fa429f,
+                    "Degraded Land by Type" : tile_layer_e7b8520955c30a4b5f009d150b6f581b,
+                    "\u2605 Suitable Degraded Land (Solar PV)" : tile_layer_b977f0aa8f4768328edf5a8ad82866c2,
+                },
+            };
+            let layer_control_006749cc4e2e395abc9220cd5138d98c = L.control.layers(
+                layer_control_006749cc4e2e395abc9220cd5138d98c_layers.base_layers,
+                layer_control_006749cc4e2e395abc9220cd5138d98c_layers.overlays,
+                {
+  "position": "topright",
+  "collapsed": false,
+  "autoZIndex": true,
+}
+            ).addTo(map_c30ba6ce5a3cf5da07ed5d6481045b12);
+
+        
+</script>
+</html>
